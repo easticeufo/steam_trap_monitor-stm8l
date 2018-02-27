@@ -1,0 +1,10 @@
+.svn/
+system.ini
+Release/
+settings/
+*.dep
+*.ewd
+*.ewp
+*.ewt
+*.eww
+

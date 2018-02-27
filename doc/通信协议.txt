@@ -1,0 +1,16 @@
+基于mqtt协议
+后台服务器到采集节点publish的Topic为ServerToNode01，需要设置Retained标志为1；
+采集节点到后台服务器publish的Topic为NodeToServer01，采集节点休眠时不会响应，定时唤醒时才会发送数据；
+传输的Data为JSON格式。
+
+ServerToNode01：
+1.设置定时采样
+{"id":"<id>","start":"23:40:59","stop":"23:59:59","interval":3,"update":5}
+id设置为all时表示对所有节点发送命令，interval单位为秒，等于0时不采样，update单位为分钟，表示设备间隔多长的时间获取一次服务器下发的指令，不能为0
+
+NodeToServer01：
+1.设备当前信息，大约每隔"update"分钟上传一次，表示设备在线
+{"type":"alive","id":"<id>","node_time":"2016-10-17 23:55:01"}
+
+2.采样数据
+{"type":"sample","id":"<id>","time":"23:55:01","pressure":12345}
